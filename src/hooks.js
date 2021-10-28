@@ -22,4 +22,15 @@ const useAxios = (url) =>{
     return [state, addItem];
 }
 
-export {useFlip, useAxios};
+const useAxios2 = (baseUrl) =>{
+    const [state, setState] = useState([]);
+    const addItem = async (end = "") =>{
+        console.log(end);
+        const res = await axios.get(`${baseUrl}/${end}`);
+        setState(state =>[ ...state, {...res.data, id:uuid()}]);
+    }
+
+    return [state, addItem];
+}
+
+export {useFlip, useAxios, useAxios2};
